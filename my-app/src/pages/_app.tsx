@@ -13,6 +13,7 @@ import {
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { AppProps } from "next/app";
+import { rainbowWeb3AuthConnector } from "@/libs/RainbowWeb3authConnector";
 
 // get chains & publicClient data
 const { chains, publicClient } = configureChains(
@@ -32,6 +33,7 @@ const connectors = connectorsForWallets([
     wallets: [
       walletConnectWallet({ chains }),
       metaMaskWallet({ chains }),
+      rainbowWeb3AuthConnector({ chains }) as any,
     ],
   },
 ]);
