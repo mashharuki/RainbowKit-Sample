@@ -1,23 +1,32 @@
 import "@rainbow-me/rainbowkit/styles.css";
 
+import { rainbowWeb3AuthConnector } from "@/libs/RainbowWeb3authConnector";
 import {
   connectorsForWallets,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
-import { createConfig, WagmiConfig, configureChains } from "wagmi";
-import { mainnet, polygon } from "wagmi/chains";
 import {
-  walletConnectWallet,
   metaMaskWallet,
+  walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
+import { AppProps } from "next/app";
+import { polygonMumbai } from "viem/chains";
+import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
+import { avalanche, avalancheFuji, goerli, mainnet, polygon } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { AppProps } from "next/app";
-import { rainbowWeb3AuthConnector } from "@/libs/RainbowWeb3authConnector";
 
 // get chains & publicClient data
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon],
+  [
+    mainnet, 
+    polygon,
+    goerli,
+    sepolia,
+    polygonMumbai,
+    avalancheFuji,
+    avalanche,
+  ],
   [
     alchemyProvider({ 
       apiKey: `${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}` 
